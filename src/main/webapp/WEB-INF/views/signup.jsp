@@ -25,10 +25,12 @@
       <input class="un " type="text" id="username" align="center" placeholder="Username"  maxlength="30">
       <input class="pass" type="password" id="pass" align="center" placeholder="Password"  maxlength="30">
     
-     <span id="registerError" class="errorLogin">
-     </span>
+    
       <a class="submit" onClick=" registerUser()" align="center">Sign up</a>
-     
+      <br>
+      <br>
+        <span id="registerError" class="errorLogin">
+     </span>
       
          </form>       
     </div>

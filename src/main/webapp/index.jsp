@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome-4.7.0/css/font-awesome.min.css"/>">
-  <title>VS Credit Tracker</title>
+  <title>VS To Do List</title>
   </head>
 <body>
   <div class="main">
@@ -23,16 +23,17 @@
       <input class="pass" id="pass" type="password" align="center" placeholder="Password" maxlength="30">
       <a class="submit" align="center" onClick="login()">Sign in</a>
       <br>
-      <span id="registerError" class="errorLogin">
-     </span>
       
        <p class="newuser" align="center"><a onClick="redirectToSignUpPage()">New User?</p>
-            
-     </form>        
+       <br>
+       
+       <span id="registerError" class="errorLogin">
+     </span>
+      
+      </form>          
     </div>
-  
-</body>
    
-</html>
+</body>
 
+</html>
 

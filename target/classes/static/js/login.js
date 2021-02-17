@@ -24,6 +24,11 @@ function registerUser()
 
  var pass = document.getElementById("pass").value;
  var username = document.getElementById("username").value;
+
+if(validateCredentials())
+
+{
+	  document.getElementById("registerError").innerHTML="";
       var registerData = {
 			"userid": username, 
 	        "password": pass
@@ -31,10 +36,6 @@ function registerUser()
   		   }
        
 
-		
-		
-		
-		
      $.ajax(
        {
         url  : "http://localhost:8080/VSToDoList/register",
@@ -68,6 +69,24 @@ function registerUser()
 	     }
 });
 }
+else
+{
+	document.getElementById("registerError").innerHTML="Username/Password cannot be empty.!";
+}
+}
+
+function validateCredentials()
+{
+	var pass = document.getElementById("pass").value;
+     var username = document.getElementById("username").value;
+     if(pass == null || pass=="" || username == null || username =="")
+     {
+	     return false;
+      }
+    return true;
+	
+}
+
 
 function login()
 {
@@ -75,6 +94,10 @@ function login()
 
  var pass = document.getElementById("pass").value;
  var username = document.getElementById("username").value;
+ document.getElementById("registerError").innerHTML="";
+if(validateCredentials())
+
+{
       var data = {
 			"userid": username, 
 	        "password": pass
@@ -110,6 +133,12 @@ function login()
             }
 	     }
 });
+}
+else
+{
+	document.getElementById("registerError").innerHTML="Username/Password cannot be empty.!";
+	
+}
 }
 
 

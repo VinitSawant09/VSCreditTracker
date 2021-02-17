@@ -23,11 +23,13 @@
       <input class="pass" id="pass" type="password" align="center" placeholder="Password" maxlength="30">
       <a class="submit" align="center" onClick="login()">Sign in</a>
       <br>
-      <span id="registerError" class="errorLogin">
-     </span>
       
        <p class="newuser" align="center"><a onClick="redirectToSignUpPage()">New User?</p>
-            
+       <br>
+      
+       <span id="registerError" class="errorLogin">
+     </span>
+      
       </form>          
     </div>
    
