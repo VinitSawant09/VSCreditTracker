@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="<c:url value="/resources/css/font-awesome-4.7.0/css/font-awesome.min.css"/>">
-  <title>VS Credit Tracker</title>
+  <title>VS To Do List</title>
   </head>
 <body>
   <div class="main">
@@ -28,11 +28,10 @@
       
        <p class="newuser" align="center"><a onClick="redirectToSignUpPage()">New User?</p>
             
-     </form>        
+      </form>          
     </div>
-  
-</body>
    
-</html>
+</body>
 
+</html>
 
