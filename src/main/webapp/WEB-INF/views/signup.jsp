@@ -16,7 +16,7 @@
  
  <script src="<c:url value="/resources/js/login.js"/>"></script>
 
-  <title>Sign in</title>
+  <title>Sign up</title>
   </head>
 <body>
   <div class="main">

@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>VS To Do List</title>
+    <title>VS Credit Tracker</title>
 </head>
 <body >
 
 <center><h2>500 Internal Server Error.!</h2>
- <!--  <a href="http://localhost:8080/VSToDoList/"> GO BACK </a> -->  
+ <a href="./"> GO BACK </a>  
 </center>
 </body>
 </html>
