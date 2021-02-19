@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.vscredittracker.model.User;
 import com.vscredittracker.service.UserService;
@@ -44,6 +45,68 @@ public class CreditTrackerController {
 	    System.out.println("Redirecting to Sign up page.!!");
         return "signup";  
      } 
+	 
+	 @RequestMapping(value = "/home",method = RequestMethod.GET)  
+	 
+	 public String home(HttpServletRequest request)
+	 {  
+	    System.out.println("Inside home method of CreditTrackerController");
+	    
+	    try
+	    {
+	    	if(request.getSession().getAttribute("id")!="0" && request.getSession().getAttribute("id")!="" )
+			{
+	    		System.out.println(request.getSession().getAttribute("id"));
+	    	    System.out.println("Redirecting to Home page.!!");
+	    	    return "home";
+			}
+	    	
+	    }
+	    catch(Exception e)
+	    {
+	    	System.out.println(e);
+	    }
+	    System.out.println("End home method of CreditTrackerController");
+	   
+         return "401";
+     } 
+	 
+ @RequestMapping(value = "/adminHome",method = RequestMethod.GET)  
+	 
+	 public String adminhome(HttpServletRequest request)
+	 {  
+	    System.out.println("Inside adminhome method of CreditTrackerController");
+	    
+	    try
+	    {
+	    	if(request.getSession().getAttribute("id")!="0" && request.getSession().getAttribute("id")!="" )
+			{
+	    		System.out.println(request.getSession().getAttribute("id"));
+	    	    System.out.println("Redirecting to adminhome page.!!");
+	    	    return "adminHome";
+			}
+	    	
+	    }
+	    catch(Exception e)
+	    {
+	    	System.out.println(e);
+	    }
+	    System.out.println("End adminhome method of CreditTrackerController");
+	   
+         return "401";
+     } 
+	 
+	 
+	 @RequestMapping(value = "/logout",method = RequestMethod.GET)  
+	
+	 public String logout(HttpServletRequest request)
+	 {  
+	    System.out.println("Inside logout method of CreditTrackerController");
+	    System.out.println("Redirecting to login page !!");
+	    request.getSession().setAttribute("id","0");
+	    System.out.println("End logout method of CreditTrackerController");
+        return "index";  
+     }  
 	 
 	 @RequestMapping(value = "/registerUser", method = { RequestMethod.GET, RequestMethod.POST })  
      @ResponseBody
@@ -120,7 +183,7 @@ public class CreditTrackerController {
 	        	}
 	        	int id = 0;
 	        	id= (int)user.fetchUserId(objUser);
-	        	request.getSession().setAttribute("userId", id);
+	        	request.getSession().setAttribute("id", id);
 	        	System.out.println("Actual user id is :"+id);
 	        }
 	        else
@@ -148,9 +211,9 @@ public class CreditTrackerController {
  {
 	System.out.println("Inside add method of CreditTrackerController");
 	OutputVO lOutputVO = new OutputVO();
-	//int i = (int) request.getSession().getAttribute("userId");
-	User userObj =new User();
-	objCreditCard.setId(1);
+	int i = (int) request.getSession().getAttribute("id");
+	
+	objCreditCard.setId(i);
 	
     UserService user= new UserService();
     List<CreditCard> creditCardList= new ArrayList<CreditCard>();

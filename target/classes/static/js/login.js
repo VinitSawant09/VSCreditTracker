@@ -38,7 +38,7 @@ if(validateCredentials())
 
      $.ajax(
        {
-        url  : "http://localhost:8080/VSToDoList/register",
+        url  : "./registerUser",
        headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -52,10 +52,10 @@ if(validateCredentials())
         success: function(response){
 	         if(response.statusCode == "0")
 	        { 
-		      document.getElementById("registerError").innerHTML="";
+		     document.getElementById("registerError").innerHTML="";
 			 alert("Successfully registered. Please Sign In now.");
              console.log(response);
-			 window.location.replace("http://localhost:8080/VSToDoList/");
+			 window.location.replace("./");
              }
             else if(response.statusCode == "1")
             {
@@ -104,7 +104,7 @@ if(validateCredentials())
 		   }
      $.ajax(
        {
-        url  : "http://localhost:8080/VSToDoList/validateUser",
+        url  : "./login",
        headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -119,8 +119,17 @@ if(validateCredentials())
 	        { 
 		     document.getElementById("registerError").innerHTML="";
 			 alert("Successfully logged in ");
-             console.log(response);
-			 window.location.replace("http://localhost:8080/VSToDoList/home");
+				console.log(response);
+		     if(response.creditCardList == null)
+             {
+	            window.location.replace("./home");
+              }
+             else
+             {
+			 window.location.replace("./adminHome");
+		     }
+             
+			 
              }
             else if(response.statusCode == "1")
             {
