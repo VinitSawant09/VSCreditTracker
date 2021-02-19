@@ -238,4 +238,33 @@ public class UserDAO {
 			System.out.println("End of getAllCreditCardAfterUpdation method of UserDAO");
 			return creditCardList;
 		}
+	 
+	 public int update(CreditCard objCreditCard) {
+			// TODO Auto-generated method stub
+			
+			System.out.println("Inside update method of UserDAO");
+			int result = 0;
+			 Transaction transaction = null;
+				try
+				{ 
+				
+				Session session = HibernateUtil.getSessionFactory().openSession() ;
+				 transaction = session.beginTransaction();
+	            String query = "update CreditCard td set td.expiryDate=:expiryDate where td.creditCardNumber=:creditCardNumber";
+	            Query query1 = session.createQuery(query);
+	            query1.setParameter("expiryDate", objCreditCard.getExpiryDate());
+	            query1.setParameter("creditCardNumber", objCreditCard.getCreditCardNumber());
+	            
+	            result = query1.executeUpdate();
+	           
+	            transaction.commit();
+	        } catch (Exception e) {
+	        	 if (transaction != null) {
+		                transaction.rollback();
+		            }
+		            e.printStackTrace();
+	            }
+			System.out.println("End of update method of UserDAO");
+			return result;
+		}
 }

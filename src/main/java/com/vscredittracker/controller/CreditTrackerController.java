@@ -185,6 +185,52 @@ public class CreditTrackerController {
     return lOutputVO;  
 }
     
+      
+ @RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)  
+ 
+	@ResponseBody
+	 public OutputVO update(@RequestBody CreditCard  objCreditCard,HttpServletRequest request)
+	 {
+		 System.out.println("Inside update method of CreditTrackerController");
+	    List <CreditCard> todolist = null;
+	    OutputVO lOutputVO = new OutputVO();
+	   int result = 0;   
+	    UserService user= new UserService();
+	    try
+	    {
+	    	result = user.update(objCreditCard);
+	   
+	   
+	    if(result==1)
+	    {
+	    	lOutputVO.setStatus("Success updating to Credit Card.!!");
+	    	lOutputVO.setStatusCode("0");
+	    	/*todolist = user.getToDoAfterUpdation(lToDoVO);
+	    	lOutputVO.setTodolist(todolist);*/
+	    }
+	    else {
+	    	lOutputVO.setStatus("Failure updating Credit Card.!!");
+	    	lOutputVO.setStatusCode("1");
+	    	/*
+	    	todolist = user.getToDoAfterUpdation(lToDoVO);
+	    	lOutputVO.setTodolist(todolist);*/
+	    }
+	    }
+	    catch(Exception e)
+	    {
+	        lOutputVO.setStatus("Failed");
+	    	
+	    	lOutputVO.setStatusCode("1");
+	    	/*
+	    	todolist = user.getToDoAfterUpdation(lToDoVO);
+	    	lOutputVO.setTodolist(todolist);*/
+	
+	    	
+	    }
+	    System.out.println("End update method of CreditTrackerController");
+	    return lOutputVO; 
+	}  
+
  
 	 
 	 public boolean validateUserId(String userid)
@@ -221,4 +267,6 @@ public class CreditTrackerController {
 		 System.out.println("End of validateCreditCard method of CreditTrackerController");
 		 return result;
 	 }
+	 
+	 
 }
