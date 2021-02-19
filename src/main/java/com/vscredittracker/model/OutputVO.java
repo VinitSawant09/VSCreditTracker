@@ -17,5 +17,12 @@ public class OutputVO {
 		this.statusCode = statusCode;
 	}
 	private String statusCode;
+	private List<CreditCard> creditCardList;
+	public List<CreditCard> getCreditCardList() {
+		return creditCardList;
+	}
+	public void setCreditCardList(List<CreditCard> creditCardList) {
+		this.creditCardList = creditCardList;
+	}
 	
 }

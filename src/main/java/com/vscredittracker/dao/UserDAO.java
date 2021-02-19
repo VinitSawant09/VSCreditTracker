@@ -1,13 +1,14 @@
 package com.vscredittracker.dao;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import com.vscredittracker.model.CreditCard;
 import com.vscredittracker.model.User;
 import com.vscredittracker.hibernate.HibernateUtil;
 
@@ -153,4 +154,62 @@ public class UserDAO {
 			return id;
 		
 	}
+
+
+	public boolean addCreditCard(CreditCard objCreditCard) 
+	{
+		System.out.println("Inside addCreditCard method of UserDAO");
+		
+		
+        Transaction transaction = null;
+        boolean result = false;
+        try {
+        	Session session = HibernateUtil.getSessionFactory().openSession();
+            // start a transaction
+            transaction = session.beginTransaction();
+            
+            session.save(objCreditCard);
+           
+           	// commit transaction
+            transaction.commit();
+            result = true;
+           
+            
+        
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+                return false;
+            }
+            e.printStackTrace();
+        }
+        System.out.println("End of addCreditCard method of UserDAO");
+    	return result;
+	}
+	
+	 public List<CreditCard> getCreditCardAfterUpdation(CreditCard objCreditCard) {
+			
+			System.out.println("Inside getCreditCardAfterUpdation method of UserDAO");
+			// TODO Auto-generated method stub
+			 List <CreditCard> creditCardList = null;
+			 Query query = null;
+			
+			try{ 
+				
+				 	Session session = HibernateUtil.getSessionFactory().openSession() ;
+				    String hql = " FROM CreditCard td WHERE td.id = :id";
+		            
+				    query = session.createQuery(hql);
+		            query.setParameter("id", objCreditCard.getId());
+		            creditCardList = query.getResultList();
+		            System.out.println("List size="+creditCardList.size());
+		        } 
+			catch (Exception e) {
+				
+		        	 e.printStackTrace();
+		            }
+	           
+			System.out.println("End of getCreditCardAfterUpdation method of UserDAO");
+			return creditCardList;
+		}
 }

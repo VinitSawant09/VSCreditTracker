@@ -1,7 +1,12 @@
 package com.vscredittracker.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vscredittracker.dao.UserDAO;
+import com.vscredittracker.model.CreditCard;
 import com.vscredittracker.model.User;
+
 
 public class UserService {
 
@@ -58,6 +63,43 @@ public class UserService {
 		
 		System.out.println("End of fetchUserId method of UserService");
 		return id;
+	}
+	
+	public boolean addCreditCard(CreditCard objCreditCard) {
+		System.out.println("Inside addCreditCard method of UserService");
+		
+		boolean result = false;
+		UserDAO userDAO = new  UserDAO ();
+     	try
+     	{
+     		
+     		result = userDAO.addCreditCard(objCreditCard);
+     	}
+     	catch(Exception e)
+     	{
+     		
+     		e.printStackTrace();
+     	}
+     	System.out.println("End of addCreditCard method of UserService");
+         return result;
+	}
+
+	public List<CreditCard> getCreditCardAfterUpdation(CreditCard objCreditCard) {
+		
+		System.out.println("Inside getCreditCardAfterUpdation method of UserService");
+		List<CreditCard> todolist = new ArrayList<CreditCard>();
+     	try
+     	{
+     		 UserDAO userDAO = new  UserDAO ();
+     		 todolist = userDAO.getCreditCardAfterUpdation(objCreditCard);
+     	}
+     	catch(Exception e)
+     	{
+     		
+     		e.printStackTrace();
+     	}
+     	System.out.println("End of getCreditCardAfterUpdation method of UserService");
+         return todolist;
 	}
 
 }

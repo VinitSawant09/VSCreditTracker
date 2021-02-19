@@ -1,5 +1,8 @@
 package com.vscredittracker.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.annotation.Scope;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vscredittracker.model.User;
 import com.vscredittracker.service.UserService;
-
+import com.vscredittracker.model.CreditCard;
 import com.vscredittracker.model.OutputVO;
 
 
@@ -128,8 +131,61 @@ public class CreditTrackerController {
         	lOutputVO.setStatus("Error Logging In");
         	lOutputVO.setStatusCode("1");
         }
+        System.out.println("End login method of CreditTrackerController");
+		 
         return lOutputVO; 
     }  
+ 
+ 
+ @RequestMapping(value = "/add", method = { RequestMethod.GET, RequestMethod.POST })  
+ @ResponseBody
+ public OutputVO add(@RequestBody CreditCard  objCreditCard,HttpServletRequest request)
+ {
+	System.out.println("Inside add method of CreditTrackerController");
+	OutputVO lOutputVO = new OutputVO();
+	//int i = (int) request.getSession().getAttribute("userId");
+	User userObj =new User();
+	objCreditCard.setId(1);
+	
+    UserService user= new UserService();
+    List<CreditCard> creditCardList= new ArrayList<CreditCard>();
+    boolean result = false;
+    try
+    {
+    	if(validateCreditCard(objCreditCard))
+    	{
+	    result = user.addCreditCard(objCreditCard);
+	    System.out.println(result);
+	    
+	    if(result)
+	    {
+	    	lOutputVO.setStatus("Credit card added Successfully!!");
+	    	lOutputVO.setStatusCode("0");
+	    	creditCardList = user.getCreditCardAfterUpdation(objCreditCard);
+	    	lOutputVO.setCreditCardList(creditCardList);
+	    }
+	    else
+	    {
+	
+	    	   
+	    	lOutputVO.setStatus("Failed adding Credit card.!");
+	    	lOutputVO.setStatusCode("1");
+	    }
+       }
+    }
+    catch(Exception e)
+    {
+    
+   
+    	lOutputVO.setStatus("Failed adding Credit card.!");
+    	lOutputVO.setStatusCode("1");
+    	
+    }
+    System.out.println("End of add method of CreditTrackerController");
+    return lOutputVO;  
+}
+    
+ 
 	 
 	 public boolean validateUserId(String userid)
 	 {
@@ -147,5 +203,22 @@ public class CreditTrackerController {
 			 return false;
 		 }
 		 return true;
+	 }
+	 
+	 
+	 public boolean validateCreditCard(CreditCard objCreditCard)
+	 {
+		 System.out.println("Inside validateCreditCard method of CreditTrackerController");
+		 boolean result = false;
+		 
+		 if(objCreditCard.getCreditCardNumber()!= null
+		    )
+		 { 
+			result = true;
+		 }
+		 System.out.println(result);
+		 
+		 System.out.println("End of validateCreditCard method of CreditTrackerController");
+		 return result;
 	 }
 }

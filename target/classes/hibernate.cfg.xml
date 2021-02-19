@@ -25,6 +25,7 @@
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <mapping class="com.vscredittracker.model.User" />
+		<mapping class="com.vscredittracker.model.CreditCard" />
          
     </session-factory>
 </hibernate-configuration>
