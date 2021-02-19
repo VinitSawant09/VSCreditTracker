@@ -212,4 +212,30 @@ public class UserDAO {
 			System.out.println("End of getCreditCardAfterUpdation method of UserDAO");
 			return creditCardList;
 		}
+	 
+	 public List<CreditCard> getAllCreditCardAfterUpdation() {
+			
+			System.out.println("Inside getAllCreditCardAfterUpdation method of UserDAO");
+			// TODO Auto-generated method stub
+			 List <CreditCard> creditCardList = null;
+			 Query query = null;
+			
+			try{ 
+				
+				 	Session session = HibernateUtil.getSessionFactory().openSession() ;
+				    String hql = " FROM CreditCard ";
+		            
+				    query = session.createQuery(hql);
+		            
+		            creditCardList = query.getResultList();
+		            System.out.println("List size="+creditCardList.size());
+		        } 
+			catch (Exception e) {
+				
+		        	 e.printStackTrace();
+		            }
+	           
+			System.out.println("End of getAllCreditCardAfterUpdation method of UserDAO");
+			return creditCardList;
+		}
 }

@@ -101,5 +101,23 @@ public class UserService {
      	System.out.println("End of getCreditCardAfterUpdation method of UserService");
          return todolist;
 	}
+	
+public List<CreditCard> getAllCreditCardAfterUpdation() {
+		
+		System.out.println("Inside getAllCreditCardAfterUpdation method of UserService");
+		List<CreditCard> todolist = new ArrayList<CreditCard>();
+     	try
+     	{
+     		 UserDAO userDAO = new  UserDAO ();
+     		 todolist = userDAO.getAllCreditCardAfterUpdation();
+     	}
+     	catch(Exception e)
+     	{
+     		
+     		e.printStackTrace();
+     	}
+     	System.out.println("End of getAllCreditCardAfterUpdation method of UserService");
+         return todolist;
+	}
 
 }
