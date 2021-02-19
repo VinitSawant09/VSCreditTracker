@@ -29,14 +29,14 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
 %>
 
 <div class="logo-banner">
-		<img src="<c:url value="/resources/img/todoicon.png"/>"> <span class="logo-name">VS Credit Tracker</span>
+		<img src="<c:url value="/resources/img/creditcard.jpg"/>"> <span class="logo-name">VS Credit Tracker</span>
 	</div>
     <div class="menu-bar-div">
 	<nav class="menu-bar1">
 
 		<ul >
 			
-			<li><a href="#" onClick="viewActiveToDo()" >View All Credit Cards</a></li>
+			<li><a href="<c:url value="/adminHome" />">View All Credit Cards</a></li>
 			
 			<li><a   href="<c:url value="/logout" />">Log Out</a></li>
 		</ul>
@@ -85,5 +85,68 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
     </tfoot>
     </table>
 </div>
+<!-- about us section-->	
+	<div class="index-about-us" id="about-us">
+		<hr class="ihorizontal-line-start">
+		
+		<h2 class="featured-car-heading">ABOUT US</h2>
+		<hr class="ihorizontal-line-end">
+
+		<div class="about-us-content" id="about-us-content">
+			<p>Founded by Vinit Sawant, VS Credit Tracker is a website which helps you to keep track of all the 
+	          credit cards.</p>
+			<br>
+			<p>VS Credit Tracker is a pet project to demonstrate the learnings from the founders's educational as well as work experience</p>
+			<br>
+			<p>Technology used: JAVA8, Spring 5, Hibernate 5, HSQL etc.</p>
+		</div>
+	</div>
+<!-- contact us section-->	
+	<div class="index-contact-us" id="contact-us">
+		<hr class="horizontal-line-start">
+		<h2 class="featured-car-heading">CONTACT US</h2>
+		<hr class="horizontal-line-end">
+	</div>
+
+	<div class="contact-us-content" id="contact-us-content">
+
+		<div class="address">
+			<h3>ADDRESS</h3>
+			<p>
+				NO. 3-4,<br> PORTLAND STREET NORTH, <br> DUBLIN 01.<br>
+				D-01
+			</p>
+
+		</div>
+
+		<div id="contact-numbers" class="contact-numbers">
+			<h3>CONTACT NUMBERS</h3>
+			<p>
+				+353 33 333 3333 <br> <br> <br> <br>
+
+			</p>
+		</div>
+
+		<div class="opening-hrs">
+			<h3>OPENING HOURS</h3>
+
+			<p>
+				Mon-Thu : 09:00 - 17:30 <br> Fri : 09:00 - 17:00 <br> Sat
+				: 10:00 - 15:00 <br> Sun : CLOSED
+			</p>
+		</div>
+		<div class="email">
+			<h3>EMAIL</h3>
+			<p>vscredittracker@sales.ie</p>
+			<br> <br> <br>
+
+		</div>
+	</div>
+	<!-- footer section-->	
+	<div class="footer">
+		<p>Powered by VS &copy; 2021</p>
+	</div>
+	
+	<!-- scripts -->
 </body>
 </html>

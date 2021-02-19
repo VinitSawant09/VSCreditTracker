@@ -77,3 +77,16 @@ function onLoad()
 	});
 	
 }
+
+function displayAddCreditForm()
+{
+	
+	var dataTable = document.getElementById("allCreditCardTable");
+	dataTable.style.display ="none";
+	
+	
+	
+	
+}
+
+
