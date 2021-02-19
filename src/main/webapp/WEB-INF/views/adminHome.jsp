@@ -7,13 +7,23 @@
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"
 		type="text/javascript"></script>
 <title>VS Credit Tracker</title>
-
-<!-- css  -->
-
-
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/index.css"/>">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+ 
+<!-- css  -->
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+	  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
+ <!--  <link rel="stylesheet" href="<c:url value="/resources/css/datatables.min.css"/>">
+  <script src="<c:url value="/resources/js/datatables.min.js"/>"></script>-->
+ <script src="<c:url value="/resources/js/admin.js"/>"></script>
+
+
 </head>
-<body>
+<body onLoad="onLoad()">
 <%
 response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
 %>
@@ -32,5 +42,48 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
 		</ul>
 	</nav>
 	</div>
+	<br>
+	<div id="allCreditCardTable" class="allCreditCardTable" >
+    <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+        <th class="th-sm">User name
+
+          </th>
+      <th class="th-sm">Credit card number
+
+      </th>
+      <th class="th-sm">Merchant name
+
+      </th>
+      <th class="th-sm">Expiry Date
+
+      </th>
+      <th class="th-sm">Max Limit
+
+      </th>
+           
+    </tr>
+    </thead>
+    <tbody id ="transactOrder">
+
+    </tbody>
+    <tfoot class="tfoot">
+    <tr>
+      <th>User Name
+      </th>
+      <th>Credit card Number
+      </th>
+      <th>Merchant name
+      </th>
+      <th>Expiry Date
+      </th>
+      <th>Max Limit
+      </th>
+         
+    </tr>
+    </tfoot>
+    </table>
+</div>
 </body>
 </html>
