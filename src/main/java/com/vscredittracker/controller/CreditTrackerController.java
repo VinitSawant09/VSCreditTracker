@@ -218,9 +218,9 @@ public class CreditTrackerController {
     boolean result = false;
     try
     {
-    	//int i = (int) request.getSession().getAttribute("id");
+    	int i = (int) request.getSession().getAttribute("id");
     	
-    	objCreditCard.setId(2);
+    	objCreditCard.setId(i);
     	if(validateCreditCard(objCreditCard))
     	{
 	    result = user.addCreditCard(objCreditCard);
@@ -274,15 +274,12 @@ public class CreditTrackerController {
 	    {
 	    	lOutputVO.setStatus("Success updating to Credit Card.!!");
 	    	lOutputVO.setStatusCode("0");
-	    	/*todolist = user.getToDoAfterUpdation(lToDoVO);
-	    	lOutputVO.setTodolist(todolist);*/
+	    	
 	    }
 	    else {
 	    	lOutputVO.setStatus("Failure updating Credit Card.!!");
 	    	lOutputVO.setStatusCode("1");
-	    	/*
-	    	todolist = user.getToDoAfterUpdation(lToDoVO);
-	    	lOutputVO.setTodolist(todolist);*/
+	    	
 	    }
 	    }
 	    catch(Exception e)
@@ -290,9 +287,7 @@ public class CreditTrackerController {
 	        lOutputVO.setStatus("Failed");
 	    	
 	    	lOutputVO.setStatusCode("1");
-	    	/*
-	    	todolist = user.getToDoAfterUpdation(lToDoVO);
-	    	lOutputVO.setTodolist(todolist);*/
+	    	
 	
 	    	
 	    }

@@ -45,6 +45,10 @@ function onLoad()
                                      $('td', nRow).css('background-color', 'Black').css('color','White');
                              },
                    'columnDefs': [
+								 {
+                              "targets": 0,
+                              "className": 'dt-body-right',
+                                    },
                                 {
                               "targets": 1,
                               "className": 'dt-body-right',

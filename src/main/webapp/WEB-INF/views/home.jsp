@@ -7,6 +7,25 @@
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"
 		type="text/javascript"></script>
 <title>VS Credit Tracker</title>
+<script>
+function validate(evt) {
+	  var theEvent = evt || window.event;
+
+	  // Handle paste
+	  if (theEvent.type === 'paste') {
+	      key = event.clipboardData.getData('text/plain');
+	  } else {
+	  // Handle key press
+	      var key = theEvent.keyCode || theEvent.which;
+	      key = String.fromCharCode(key);
+	  }
+	  var regex = /[0-9]|\./;
+	  if( !regex.test(key) ) {
+	    theEvent.returnValue = false;
+	    if(theEvent.preventDefault) theEvent.preventDefault();
+	  }
+	}
+</script>
 
 <!-- css  -->
 
@@ -83,6 +102,30 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
     </tfoot>
     </table>
 </div>
+
+<div class="form-style-5" id="addForm" width="50%">
+<form>
+<fieldset>
+<legend><span class="number">1</span> Add New Credit Card</legend>
+<input type="text" id="creditCardNumber" pattern="\d*" onkeypress='validate(event)' maxlength="19" name="field1"  placeholder="Your Credit Card Number *">
+<input type="text"id="creditCardMerchant" name="field2" maxlength="30" placeholder="Credit Card Merchant *">
+<input type="text" id="creditCardLimit" name="field3" onkeypress='validate(event)' maxlength="12" placeholder="Credit Card Limit *">
+<label for="job">Credit Card Expiry:</label>
+<input type="month" id="start" name="start"
+       min="2021-02" value="2021-02">
+<br>
+
+ <span id="creditError" class="creditError">
+ </span>
+<br>
+</fieldset>
+
+<input type="button" onClick="addCreditCard()" value="Add Credit Card" />
+</form>
+</div>
+
+
+
 <!-- about us section-->	
 	<div class="index-about-us" id="about-us">
 		<hr class="ihorizontal-line-start">

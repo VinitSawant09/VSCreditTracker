@@ -47,7 +47,7 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
     <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <thead>
         <tr>
-        <th class="th-sm">User name
+        <th class="th-sm">User Id
 
           </th>
       <th class="th-sm">Credit card number
@@ -70,7 +70,7 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
     </tbody>
     <tfoot class="tfoot">
     <tr>
-      <th>User Name
+      <th>User Id
       </th>
       <th>Credit card Number
       </th>
