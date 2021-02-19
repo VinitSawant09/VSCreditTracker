@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vscredittracker.model.User;
 import com.vscredittracker.service.UserService;
-import com.vstodolist.dao.UserDAO;
-import com.vstodolist.model.LoginVO;
+
 import com.vscredittracker.model.OutputVO;
 
 
@@ -112,7 +111,7 @@ public class CreditTrackerController {
 	        	lOutputVO.setStatus("Success.!!");
 	        	lOutputVO.setStatusCode("0");
 	        	int id = 0;
-	        	id= (int)ud.getUserId(objUser);
+	        	id= (int)user.fetchUserId(objUser);
 	        	request.getSession().setAttribute("userId", id);
 	        	System.out.println("Actual user id is :"+id);
 	        }

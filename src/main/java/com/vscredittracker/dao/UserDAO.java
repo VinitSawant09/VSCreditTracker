@@ -126,4 +126,31 @@ public class UserDAO {
        
 		
    }
+	
+	public int fetchUserId(User objUser) {
+		// TODO Auto-generated method stub
+		 System.out.println("Inside fetchUserId method of UserDAO");
+		 int id = 0;
+    	 try{ 
+				
+				Session session = HibernateUtil.getSessionFactory().openSession() ;
+				
+
+	            // get an student object
+	            String hql = "select id FROM User l WHERE l.userid = :userId";
+	            
+	            Query query = session.createQuery(hql);
+	            query.setParameter("userId", objUser.getUserid());
+	            id =(int) query.getResultList().get(0);
+
+	           
+	            // commit transaction
+	          
+	        } catch (Exception e) {
+	        	 e.printStackTrace();
+	            }
+    	    System.out.println("End of fetchUserId method of UserDAO");
+			return id;
+		
+	}
 }
