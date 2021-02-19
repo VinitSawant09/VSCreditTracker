@@ -350,7 +350,8 @@ public class CreditTrackerController {
 	    UserService user= new UserService();
 	    try
 	    {
-	    	objCreditCard.setId(2);
+	    	int i = (int) request.getSession().getAttribute("id");
+	    	objCreditCard.setId(i);
 	    	creditCardList = user.getCreditCardAfterUpdation(objCreditCard);
 	   
 	   
