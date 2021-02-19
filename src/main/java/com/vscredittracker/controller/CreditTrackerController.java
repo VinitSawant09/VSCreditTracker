@@ -113,6 +113,11 @@ public class CreditTrackerController {
 	        {
 	        	lOutputVO.setStatus("Success.!!");
 	        	lOutputVO.setStatusCode("0");
+	        	if(userId.equals("admin") && password.equals("admin"))
+	        	{
+	        		
+	        		lOutputVO.setCreditCardList(user.getAllCreditCardAfterUpdation());
+	        	}
 	        	int id = 0;
 	        	id= (int)user.fetchUserId(objUser);
 	        	request.getSession().setAttribute("userId", id);

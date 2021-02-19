@@ -1,0 +1,1 @@
+insert into User (id,userid,password,createdOn) VALUES (1,'admin', 'admin','DEFAULT')
