@@ -211,15 +211,16 @@ public class CreditTrackerController {
  {
 	System.out.println("Inside add method of CreditTrackerController");
 	OutputVO lOutputVO = new OutputVO();
-	//int i = (int) request.getSession().getAttribute("id");
 	
-	objCreditCard.setId(2);
 	
     UserService user= new UserService();
     List<CreditCard> creditCardList= new ArrayList<CreditCard>();
     boolean result = false;
     try
     {
+    	//int i = (int) request.getSession().getAttribute("id");
+    	
+    	objCreditCard.setId(2);
     	if(validateCreditCard(objCreditCard))
     	{
 	    result = user.addCreditCard(objCreditCard);
@@ -339,6 +340,49 @@ public class CreditTrackerController {
 	    	
 	    }
 	    System.out.println("End getAllCreditDetails method of CreditTrackerController");
+	    return lOutputVO; 
+	}  
+
+ @RequestMapping(value = "/getSelfCreditDetails", method = { RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_VALUE)  
+ 
+	@ResponseBody
+	 public OutputVO getSelfCreditDetails(HttpServletRequest request)
+	 {
+		System.out.println("Inside getSelfCreditDetails method of CreditTrackerController");
+	    List <CreditCard> creditCardList = null;
+	    OutputVO lOutputVO = new OutputVO();
+	    CreditCard  objCreditCard = new CreditCard();
+	    UserService user= new UserService();
+	    try
+	    {
+	    	objCreditCard.setId(2);
+	    	creditCardList = user.getCreditCardAfterUpdation(objCreditCard);
+	   
+	   
+	    if(creditCardList!= null)
+	    {
+	    	lOutputVO.setCreditCardList(creditCardList);
+	    	lOutputVO.setStatus("Success fetching Credit Card.!!");
+	    	lOutputVO.setStatusCode("0");
+	    	
+	    }
+	    else 
+	    {
+	    	lOutputVO.setStatus("Failure fetching Credit Card.!!");
+	    	lOutputVO.setStatusCode("1");
+	    	
+	    }
+	    }
+	    catch(Exception e)
+	    {
+	        lOutputVO.setStatus("Failed");
+	    	
+	    	lOutputVO.setStatusCode("1");
+	    	
+	
+	    	
+	    }
+	    System.out.println("End getSelfCreditDetails method of CreditTrackerController");
 	    return lOutputVO; 
 	}  
 
