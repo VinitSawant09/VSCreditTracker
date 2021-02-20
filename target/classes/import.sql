@@ -1,1 +1,1 @@
-insert into User (id,userid,password,createdOn) VALUES (1,'admin', 'admin','DEFAULT')
+insert into User (id,userid,password,createdOn) VALUES (1,'admin', '$2a$10$TmaLKr1H4KGZ7cijfZ2KwudLz/XvmmNsYfGpjgVNtSExqvmDhszKK','DEFAULT')

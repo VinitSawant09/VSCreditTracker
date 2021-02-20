@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.vscredittracker.model.CreditCard;
 import com.vscredittracker.model.User;
+import com.vscredittracker.util.PwManagement;
 import com.vscredittracker.hibernate.HibernateUtil;
 
 
@@ -28,7 +29,9 @@ public class UserDAO {
         	Session session = HibernateUtil.getSessionFactory().openSession();
             // start a transaction
             transaction = session.beginTransaction();
-            
+            PwManagement pw =new PwManagement();
+            objUser.setPassword(pw.generatePassword(objUser.getPassword()));
+            System.out.println(objUser);
             if(!checkUserNameExists(objUser))
             {
 	            // save the user objects
@@ -99,14 +102,14 @@ public class UserDAO {
            Query query = session.createQuery(hql);
            query.setParameter("userId", objUser.getUserid());
            List<User> results = query.getResultList();
-
+           PwManagement pw =new PwManagement();
            if (results != null && !results.isEmpty()) 
            {
            	System.out.println(results.get(0).getPassword());
            	System.out.println(objUser.getPassword());
            	String actual= results.get(0).getPassword();
            	String entered = objUser.getPassword();
-           	if(actual.equals(entered))
+           	if(pw.checkPassword(entered, actual))
            	{
            		System.out.println("User credentials are valid.!!!");
            		result = true;
