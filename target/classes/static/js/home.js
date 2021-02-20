@@ -2,6 +2,8 @@ function onLoad()
 {
 	var addForm = document.getElementById("addForm");
 	addForm.style.display ="none";
+	var  editForm = document.getElementById("editForm");
+    editForm.style.display ="none";
 	var $tableId = $("#dtBasicExample");
 	
 	$.ajax(
@@ -30,14 +32,15 @@ function onLoad()
 	                      .append($("<td>").html(creditCardList[i].cardMerchant))
 	                      .append($("<td>").html(creditCardList[i].expiryDate))
 	                      .append($("<td>").html(creditCardList[i].maxLimit))
-	                      
+	                      .append($("<td>").html(creditCardList[i].creditCardNumber))
 	                     );
 	              
         		 }
 
  	    $(document).ready(function () 
 		{
-              $('#dtBasicExample').DataTable({
+			 
+              var table = $('#dtBasicExample').DataTable({
                   "order": [[ 0, "asc" ]],
                   "fnRowCallback": function(nRow, aData, iDisplayIndex, iDisplayIndexFull)
                             {
@@ -47,6 +50,7 @@ function onLoad()
                    'columnDefs': [
 								 {
                               "targets": 0,
+                               
                               "className": 'dt-body-right',
                                     },
                                 {
@@ -60,15 +64,35 @@ function onLoad()
                                      {
                               "targets": 3,
                               "className": 'dt-body-right',
-                                    }
+                                    },
+							                                {
+							            "targets": -1,
+							            "data": null,
+							            "defaultContent": "<button>Edit!</button>"
+							        } 
                                     
 
 
-                                     ]
+                                     ],
+                               
 
                    });
               $('.dataTables_length').addClass('bs-select');
 		
+		      $('#dtBasicExample tbody').on( 'click', 'button', function () {
+			        var data = table.row( $(this).parents('tr') ).data();
+			        console.log(data[0])
+                        var dataTable = document.getElementById("allCreditCardTable");
+					    dataTable.style.display ="none";
+						
+						var  editForm = document.getElementById("editForm");
+						editForm.style.display ="block";
+						document.getElementById("creditCardNumberEdit").value=data[0];
+						document.getElementById("creditCardMerchantEdit").value=data[1];
+						document.getElementById("creditCardLimitEdit").value=data[3];
+						
+                      
+			    } );
 		
 		    });
         }
@@ -86,6 +110,8 @@ function displayAddCreditForm()
 	dataTable.style.display ="none";
 	var addForm = document.getElementById("addForm");
 	addForm.style.display ="block";
+	var  editForm = document.getElementById("editForm");
+	dataTable.style.display ="none";
 		
 }
 
@@ -169,6 +195,51 @@ function validateCreditCard()
 	return false;
 	
 	
+	
+}
+
+function editCreditCard()
+{
+	
+	var creditCardNumber = document.getElementById("creditCardNumberEdit").value;
+	var expiryDate = 	document.getElementById("editstart").value;
+	
+	var creditCardData = {
+			"creditCardNumber": creditCardNumber,  
+            "expiryDate":expiryDate
+  		   }
+	 $.ajax(
+       {
+        url  : "./update",
+       headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+			
+        },
+        type:"POST",
+        data : JSON.stringify(creditCardData),
+        contentType: 'application/json',
+        cache: false,
+        processData: false,
+        success: function(response){
+	         if(response.statusCode == "0")
+	        { 
+		        document.getElementById("creditEditError").innerHTML="";
+		       alert("Credit Card Edited successfully!");
+		       window.location.replace("./home");
+		
+		    }
+            else if(response.statusCode == "1")
+            {
+	       
+	         document.getElementById("creditEditError").innerHTML="Failed Edit of Card";
+            }
+            else 
+            {
+	          document.getElementById("creditEditError").innerHTML="Please try again later";
+            }
+        }
+	});
 	
 }
 

@@ -80,6 +80,9 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
       <th class="th-sm">Max Limit
 
       </th>
+      <th class="th-sm">Edit
+
+      </th>
            
     </tr>
     </thead>
@@ -96,6 +99,8 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
       <th>Expiry Date
       </th>
       <th>Max Limit
+      </th>
+       <th>Edit
       </th>
          
     </tr>
@@ -124,7 +129,26 @@ response.setHeader("Cache-Control","no-cache,no-store ,must-revalidate");
 </form>
 </div>
 
+<div class="form-style-5" id="editForm" width="50%">
+<form>
+<fieldset>
+<legend><span class="number">1</span> Edit Credit Card</legend>
+<input type="text" id="creditCardNumberEdit"  name="field1" disabled>
+<input type="text"id="creditCardMerchantEdit" name="field2" maxlength="30" disabled>
+<input type="text" id="creditCardLimitEdit" name="field3" disabled>
+<label for="job">Credit Card Expiry:</label>
+<input type="month" id="editstart" name="start"
+       min="2021-02" value="2021-02">
+<br>
 
+ <span id="creditEditError" class="creditEditError">
+ </span>
+<br>
+</fieldset>
+
+<input type="button" onClick="editCreditCard()" value="Edit Credit Card" />
+</form>
+</div>
 
 <!-- about us section-->	
 	<div class="index-about-us" id="about-us">
