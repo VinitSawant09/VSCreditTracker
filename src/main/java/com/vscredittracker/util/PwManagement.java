@@ -2,8 +2,6 @@ package com.vscredittracker.util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.vscredittracker.model.User;
-
 public class PwManagement 
 {
 
