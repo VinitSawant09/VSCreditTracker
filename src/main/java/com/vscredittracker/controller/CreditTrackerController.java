@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -25,8 +26,11 @@ import com.vscredittracker.model.OutputVO;
 @CrossOrigin
 @Component
 @Controller
-@Scope("session")
 public class CreditTrackerController {
+	
+	@Autowired
+	UserService objUserService;
+	
 
 	@RequestMapping(value = "/",method = RequestMethod.GET)  
 	
@@ -108,12 +112,12 @@ public class CreditTrackerController {
         return "index";  
      }  
 	 
-	 @RequestMapping(value = "/registerUser", method = { RequestMethod.GET, RequestMethod.POST })  
+	 @RequestMapping(value = "/registerUser", method = { RequestMethod.POST })  
      @ResponseBody
 	 public OutputVO registerUser(@RequestBody User  objUser,HttpServletRequest request)
 	 {
 		System.out.println("Inside registerUser method of CreditTrackerController");
-        UserService user= new UserService();
+       
         OutputVO lOutputVO = new OutputVO();
         boolean result = false;
         try
@@ -123,7 +127,7 @@ public class CreditTrackerController {
 	        
 	        if(validatePassword(password) && validateUserId(userId))
 	        {
-	        	result = user.registerUser(objUser);
+	        	result = objUserService.registerUser(objUser);
 		        System.out.println(result);
 		        
 		        if (result)
@@ -151,14 +155,14 @@ public class CreditTrackerController {
     }  
 	 
 	 
- @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)  
+ @RequestMapping(value = "/login", method = { RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)  
 	 
      @ResponseBody
 	 public OutputVO login(@RequestBody User  objUser,HttpServletRequest request)
 	 {
-		 System.out.println("Inside login method of CreditTrackerController");
+		System.out.println("Inside login method of CreditTrackerController");
 		 
-        UserService user= new UserService();
+        
        
         OutputVO lOutputVO = new OutputVO();
         
@@ -169,7 +173,7 @@ public class CreditTrackerController {
 	        
 	        if(validatePassword(password) && validateUserId(userId))
 	        {
-	        boolean result = user.validateLogin(objUser);
+	        boolean result = objUserService.validateLogin(objUser);
 	        System.out.println(result);
 	       
 	        if (result)
@@ -179,10 +183,10 @@ public class CreditTrackerController {
 	        	if(userId.equals("admin") && password.equals("admin"))
 	        	{
 	        		
-	        		lOutputVO.setCreditCardList(user.getAllCreditCardAfterUpdation());
+	        		lOutputVO.setCreditCardList(objUserService.getAllCreditCardAfterUpdation());
 	        	}
 	        	int id = 0;
-	        	id= (int)user.fetchUserId(objUser);
+	        	id= (int)objUserService.fetchUserId(objUser);
 	        	request.getSession().setAttribute("id", id);
 	        	System.out.println("Actual user id is :"+id);
 	        }
@@ -205,7 +209,7 @@ public class CreditTrackerController {
     }  
  
  
- @RequestMapping(value = "/add", method = { RequestMethod.GET, RequestMethod.POST })  
+ @RequestMapping(value = "/add", method = { RequestMethod.POST })  
  @ResponseBody
  public OutputVO add(@RequestBody CreditCard  objCreditCard,HttpServletRequest request)
  {
@@ -213,7 +217,7 @@ public class CreditTrackerController {
 	OutputVO lOutputVO = new OutputVO();
 	
 	
-    UserService user= new UserService();
+   
     List<CreditCard> creditCardList= new ArrayList<CreditCard>();
     boolean result = false;
     try
@@ -223,14 +227,14 @@ public class CreditTrackerController {
     	objCreditCard.setId(i);
     	if(validateCreditCard(objCreditCard))
     	{
-	    result = user.addCreditCard(objCreditCard);
+	    result = objUserService.addCreditCard(objCreditCard);
 	    System.out.println(result);
 	    
 	    if(result)
 	    {
 	    	lOutputVO.setStatus("Credit card added Successfully!!");
 	    	lOutputVO.setStatusCode("0");
-	    	creditCardList = user.getCreditCardAfterUpdation(objCreditCard);
+	    	creditCardList = objUserService.getCreditCardAfterUpdation(objCreditCard);
 	    	lOutputVO.setCreditCardList(creditCardList);
 	    }
 	    else
@@ -255,19 +259,19 @@ public class CreditTrackerController {
 }
     
       
- @RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)  
+ @RequestMapping(value = "/update", method = { RequestMethod.PUT }, produces = MediaType.APPLICATION_JSON_VALUE)  
  
 	@ResponseBody
 	 public OutputVO update(@RequestBody CreditCard  objCreditCard,HttpServletRequest request)
 	 {
 		 System.out.println("Inside update method of CreditTrackerController");
-	    List <CreditCard> todolist = null;
+	   
 	    OutputVO lOutputVO = new OutputVO();
-	   int result = 0;   
-	    UserService user= new UserService();
+	    int result = 0;   
+	    
 	    try
 	    {
-	    	result = user.update(objCreditCard);
+	    	result = objUserService.update(objCreditCard);
 	   
 	   
 	    if(result==1)
@@ -305,10 +309,10 @@ public class CreditTrackerController {
 	    List <CreditCard> creditCardList = null;
 	    OutputVO lOutputVO = new OutputVO();
 	   
-	    UserService user= new UserService();
+	   
 	    try
 	    {
-	    	creditCardList = user.getAllCreditCardAfterUpdation();
+	    	creditCardList = objUserService.getAllCreditCardAfterUpdation();
 	   
 	   
 	    if(creditCardList!= null)
@@ -347,12 +351,12 @@ public class CreditTrackerController {
 	    List <CreditCard> creditCardList = null;
 	    OutputVO lOutputVO = new OutputVO();
 	    CreditCard  objCreditCard = new CreditCard();
-	    UserService user= new UserService();
+	   
 	    try
 	    {
 	    	int i = (int) request.getSession().getAttribute("id");
 	    	objCreditCard.setId(i);
-	    	creditCardList = user.getCreditCardAfterUpdation(objCreditCard);
+	    	creditCardList = objUserService.getCreditCardAfterUpdation(objCreditCard);
 	   
 	   
 	    if(creditCardList!= null)

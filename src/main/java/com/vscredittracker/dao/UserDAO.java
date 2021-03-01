@@ -8,12 +8,14 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
+
 import com.vscredittracker.model.CreditCard;
 import com.vscredittracker.model.User;
 import com.vscredittracker.util.PwManagement;
 import com.vscredittracker.hibernate.HibernateUtil;
 
-
+@Component
 public class UserDAO {
 
 	

@@ -216,7 +216,7 @@ function editCreditCard()
             "Content-Type": "application/json"
 			
         },
-        type:"POST",
+        type:"PUT",
         data : JSON.stringify(creditCardData),
         contentType: 'application/json',
         cache: false,

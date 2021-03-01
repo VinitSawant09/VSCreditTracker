@@ -3,22 +3,27 @@ package com.vscredittracker.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.vscredittracker.dao.UserDAO;
 import com.vscredittracker.model.CreditCard;
 import com.vscredittracker.model.User;
 
-
+@Component
 public class UserService {
 
+	@Autowired
+	UserDAO userDao;
+	
 	public boolean registerUser(User objUser) {
 		// TODO Auto-generated method stub
 		System.out.println("Inside registerUser method of UserService");
-		UserDAO objUserDAO = new UserDAO();
+		
 		boolean result = false;
 		try
 		{
-			
-			result = objUserDAO.registerUser(objUser);
+			result = userDao.registerUser(objUser);
 		}
 		catch(Exception e)
 		{
@@ -32,11 +37,11 @@ public class UserService {
 	{
 		// TODO Auto-generated method stub
 		System.out.println("Inside registerUser method of UserService");
-		UserDAO objUserDAO = new UserDAO();
+		
 		boolean result = false;
 		try
 		{
-			result = objUserDAO.validateLogin(objUser);
+			result = userDao.validateLogin(objUser);
 		}
 		catch(Exception e)
 		{
@@ -50,11 +55,11 @@ public class UserService {
 	{
 		// TODO Auto-generated method stub
 		System.out.println("Inside fetchUserId method of UserService");
-		UserDAO objUserDAO = new UserDAO();
+		
 		int id = 0;
 		try
 		{
-			id = objUserDAO.fetchUserId(objUser);
+			id = userDao.fetchUserId(objUser);
 		}
 		catch(Exception e)
 		{
@@ -69,11 +74,11 @@ public class UserService {
 		System.out.println("Inside addCreditCard method of UserService");
 		
 		boolean result = false;
-		UserDAO userDAO = new  UserDAO ();
+		
      	try
      	{
      		
-     		result = userDAO.addCreditCard(objCreditCard);
+     		result = userDao.addCreditCard(objCreditCard);
      	}
      	catch(Exception e)
      	{
@@ -90,8 +95,8 @@ public class UserService {
 		List<CreditCard> todolist = new ArrayList<CreditCard>();
      	try
      	{
-     		 UserDAO userDAO = new  UserDAO ();
-     		 todolist = userDAO.getCreditCardAfterUpdation(objCreditCard);
+     		 
+     		 todolist = userDao.getCreditCardAfterUpdation(objCreditCard);
      	}
      	catch(Exception e)
      	{
@@ -108,8 +113,8 @@ public class UserService {
 			List<CreditCard> todolist = new ArrayList<CreditCard>();
 	     	try
 	     	{
-	     		 UserDAO userDAO = new  UserDAO ();
-	     		 todolist = userDAO.getAllCreditCardAfterUpdation();
+	     		 
+	     		 todolist = userDao.getAllCreditCardAfterUpdation();
 	     	}
 	     	catch(Exception e)
 	     	{
@@ -123,12 +128,12 @@ public class UserService {
 public int update(CreditCard objCreditCard) {
 		
 		System.out.println("Inside update method of UserService");
-		List<CreditCard> todolist = new ArrayList<CreditCard>();
+		
 		int result =0;
      	try
      	{
-     		 UserDAO userDAO = new  UserDAO ();
-     		result = userDAO.update(objCreditCard);
+     		 
+     		result = userDao.update(objCreditCard);
      	}
      	catch(Exception e)
      	{

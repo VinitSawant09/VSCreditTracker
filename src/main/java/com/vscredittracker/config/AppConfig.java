@@ -17,7 +17,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
-    "com.vscredittracker.controller"
+    "com.vscredittracker"
 })
 public class AppConfig implements WebMvcConfigurer {
     

@@ -32,7 +32,7 @@ public class AppContext {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[] {
-            "com.vscredittracker.model","com.vscredittracker.controller","com.vscredittracker.dao"
+            "com.vscredittracker.model","com.vscredittracker.controller","com.vscredittracker.dao","com.vscredittracker.service"
         });
         
         sessionFactory.setHibernateProperties(hibernateProperties());
