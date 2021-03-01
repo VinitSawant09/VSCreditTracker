@@ -1,10 +1,12 @@
 package com.vscredittracker.dao;
 
-import java.sql.Timestamp;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,11 +20,12 @@ import com.vscredittracker.hibernate.HibernateUtil;
 @Component
 public class UserDAO {
 
-	
+	private Logger logger = Logger.getLogger(UserDAO.class);
+
 	
 	public boolean registerUser(User objUser) {
 		// TODO Auto-generated method stub
-		System.out.println("Inside registerUser method of UserDAO");
+		logger.info("Inside registerUser method of UserDAO");
 		
 		objUser.setCreatedOn(new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
         Transaction transaction = null;
@@ -33,7 +36,7 @@ public class UserDAO {
             transaction = session.beginTransaction();
             PwManagement pw =new PwManagement();
             objUser.setPassword(pw.generatePassword(objUser.getPassword()));
-            System.out.println(objUser);
+            
             if(!checkUserNameExists(objUser))
             {
 	            // save the user objects
@@ -52,7 +55,7 @@ public class UserDAO {
             }
             e.printStackTrace();
         }
-        System.out.println("End of registerUser method of UserDAO");
+        logger.info("End of registerUser method of UserDAO");
     	return false;
 		
 	}
@@ -60,7 +63,7 @@ public class UserDAO {
 	
 	public boolean checkUserNameExists(User lUser)
     {
-    	 System.out.println("Inside checkUserNameExists method of UserDAO");
+		 logger.info("Inside checkUserNameExists method of UserDAO");
     	 try{ 
 				
 				Session session = HibernateUtil.getSessionFactory().openSession() ;
@@ -84,14 +87,14 @@ public class UserDAO {
 	        	 e.printStackTrace();
 	            }
     	 
-    	    System.out.println("End of checkUserNameExists method of UserDAO");
+    	    logger.info("End of checkUserNameExists method of UserDAO");
 			return false;
     	
     }
 	
 	public boolean validateLogin(User objUser) {
    	 
-   	 	System.out.println("Inside validateLogin method of UserDAO");
+		logger.info("Inside validateLogin method of UserDAO");
    	 	boolean result = false;
        try{ 
 			
@@ -113,7 +116,7 @@ public class UserDAO {
            	String entered = objUser.getPassword();
            	if(pw.checkPassword(entered, actual))
            	{
-           		System.out.println("User credentials are valid.!!!");
+           		logger.info("User credentials are valid.!!!");
            		result = true;
            		return result;
            	}
@@ -126,7 +129,7 @@ public class UserDAO {
        	 e.printStackTrace();
            }
        
-   		System.out.println("End of validateLogin method of UserDAO");
+        logger.info("End of validateLogin method of UserDAO");
 		return result;
           
        
@@ -135,7 +138,7 @@ public class UserDAO {
 	
 	public int fetchUserId(User objUser) {
 		// TODO Auto-generated method stub
-		 System.out.println("Inside fetchUserId method of UserDAO");
+		logger.info("Inside fetchUserId method of UserDAO");
 		 int id = 0;
     	 try{ 
 				
@@ -155,7 +158,7 @@ public class UserDAO {
 	        } catch (Exception e) {
 	        	 e.printStackTrace();
 	            }
-    	    System.out.println("End of fetchUserId method of UserDAO");
+    	    logger.info("End of fetchUserId method of UserDAO");
 			return id;
 		
 	}
@@ -163,7 +166,7 @@ public class UserDAO {
 
 	public boolean addCreditCard(CreditCard objCreditCard) 
 	{
-		System.out.println("Inside addCreditCard method of UserDAO");
+		logger.info("Inside addCreditCard method of UserDAO");
 		
 		
         Transaction transaction = null;
@@ -188,13 +191,13 @@ public class UserDAO {
             }
             e.printStackTrace();
         }
-        System.out.println("End of addCreditCard method of UserDAO");
+        logger.info("End of addCreditCard method of UserDAO");
     	return result;
 	}
 	
 	 public List<CreditCard> getCreditCardAfterUpdation(CreditCard objCreditCard) {
 			
-			System.out.println("Inside getCreditCardAfterUpdation method of UserDAO");
+		 logger.info("Inside getCreditCardAfterUpdation method of UserDAO");
 			// TODO Auto-generated method stub
 			 List <CreditCard> creditCardList = null;
 			 Query query = null;
@@ -214,13 +217,13 @@ public class UserDAO {
 		        	 e.printStackTrace();
 		            }
 	           
-			System.out.println("End of getCreditCardAfterUpdation method of UserDAO");
+			logger.info("End of getCreditCardAfterUpdation method of UserDAO");
 			return creditCardList;
 		}
 	 
 	 public List<CreditCard> getAllCreditCardAfterUpdation() {
 			
-			System.out.println("Inside getAllCreditCardAfterUpdation method of UserDAO");
+		 logger.info("Inside getAllCreditCardAfterUpdation method of UserDAO");
 			// TODO Auto-generated method stub
 			 List <CreditCard> creditCardList = null;
 			 Query query = null;
@@ -240,14 +243,14 @@ public class UserDAO {
 		        	 e.printStackTrace();
 		            }
 	           
-			System.out.println("End of getAllCreditCardAfterUpdation method of UserDAO");
+			logger.info("End of getAllCreditCardAfterUpdation method of UserDAO");
 			return creditCardList;
 		}
 	 
 	 public int update(CreditCard objCreditCard) {
 			// TODO Auto-generated method stub
 			
-			System.out.println("Inside update method of UserDAO");
+		 logger.info("Inside update method of UserDAO");
 			int result = 0;
 			 Transaction transaction = null;
 				try
@@ -269,7 +272,7 @@ public class UserDAO {
 		            }
 		            e.printStackTrace();
 	            }
-			System.out.println("End of update method of UserDAO");
+				logger.info("End of update method of UserDAO");
 			return result;
 		}
 }

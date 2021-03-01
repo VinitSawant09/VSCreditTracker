@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -28,13 +29,14 @@ public class CreditTrackerController {
 	@Autowired
 	UserService objUserService;
 	
+	private Logger logger = Logger.getLogger(CreditTrackerController.class);
 
 	@RequestMapping(value = "/",method = RequestMethod.GET)  
 	
 	 public String landing()
 	 {  
-	    System.out.println("Inside landing method of CreditTrackerController");
-	    System.out.println("Redirecting to login page.!!");
+		logger.info("Inside landing method of CreditTrackerController");
+		logger.info("Redirecting to login page.!!");
        return "index";  
     }  
 	
@@ -42,8 +44,8 @@ public class CreditTrackerController {
 		
 	 public String signup()
 	 {  
-	    System.out.println("Inside signup method of CreditTrackerController");
-	    System.out.println("Redirecting to Sign up page.!!");
+		 logger.info("Inside signup method of CreditTrackerController");
+		 logger.info("Redirecting to Sign up page.!!");
         return "signup";  
      } 
 	 
@@ -57,15 +59,15 @@ public class CreditTrackerController {
 	    {
 	    	if(request.getSession().getAttribute("id")!="0" && request.getSession().getAttribute("id")!="" )
 			{
-	    		System.out.println(request.getSession().getAttribute("id"));
-	    	    System.out.println("Redirecting to Home page.!!");
+	    		logger.info(request.getSession().getAttribute("id"));
+	    		logger.info("Redirecting to Home page.!!");
 	    	    return "home";
 			}
 	    	
 	    }
 	    catch(Exception e)
 	    {
-	    	System.out.println(e);
+	    	logger.error(e);
 	    }
 	    System.out.println("End home method of CreditTrackerController");
 	   
@@ -76,14 +78,14 @@ public class CreditTrackerController {
 	 
 	 public String adminhome(HttpServletRequest request)
 	 {  
-	    System.out.println("Inside adminhome method of CreditTrackerController");
+	 	logger.info("Inside adminhome method of CreditTrackerController");
 	    
 	    try
 	    {
 	    	if(request.getSession().getAttribute("id")!="0" && request.getSession().getAttribute("id")!="" )
 			{
-	    		System.out.println(request.getSession().getAttribute("id"));
-	    	    System.out.println("Redirecting to adminhome page.!!");
+	    		logger.info(request.getSession().getAttribute("id"));
+	    		logger.info("Redirecting to adminhome page.!!");
 	    	    return "adminHome";
 			}
 	    	
@@ -92,7 +94,7 @@ public class CreditTrackerController {
 	    {
 	    	System.out.println(e);
 	    }
-	    System.out.println("End adminhome method of CreditTrackerController");
+	    logger.info("End adminhome method of CreditTrackerController");
 	   
          return "401";
      } 
@@ -102,10 +104,10 @@ public class CreditTrackerController {
 	
 	 public String logout(HttpServletRequest request)
 	 {  
-	    System.out.println("Inside logout method of CreditTrackerController");
-	    System.out.println("Redirecting to login page !!");
+		 logger.info("Inside logout method of CreditTrackerController");
+		 logger.info("Redirecting to login page !!");
 	    request.getSession().setAttribute("id","0");
-	    System.out.println("End logout method of CreditTrackerController");
+	    logger.info("End logout method of CreditTrackerController");
         return "index";  
      }  
 	 
@@ -113,7 +115,7 @@ public class CreditTrackerController {
      @ResponseBody
 	 public OutputVO registerUser(@RequestBody User  objUser,HttpServletRequest request)
 	 {
-		System.out.println("Inside registerUser method of CreditTrackerController");
+		 logger.info("Inside registerUser method of CreditTrackerController");
        
         OutputVO lOutputVO = new OutputVO();
         boolean result = false;
@@ -125,7 +127,7 @@ public class CreditTrackerController {
 	        if(validatePassword(password) && validateUserId(userId))
 	        {
 	        	result = objUserService.registerUser(objUser);
-		        System.out.println(result);
+		        
 		        
 		        if (result)
 		        {
@@ -146,7 +148,7 @@ public class CreditTrackerController {
         	lOutputVO.setStatusCode("1");
         }
         
-		System.out.println("End of registerUser method of CreditTrackerController");
+        logger.info("End of registerUser method of CreditTrackerController");
         return lOutputVO; 
          
     }  
@@ -157,7 +159,7 @@ public class CreditTrackerController {
      @ResponseBody
 	 public OutputVO login(@RequestBody User  objUser,HttpServletRequest request)
 	 {
-		System.out.println("Inside login method of CreditTrackerController");
+	    logger.info("Inside login method of CreditTrackerController");
 		 
         
        
@@ -171,7 +173,7 @@ public class CreditTrackerController {
 	        if(validatePassword(password) && validateUserId(userId))
 	        {
 	        boolean result = objUserService.validateLogin(objUser);
-	        System.out.println(result);
+	       
 	       
 	        if (result)
 	        {
@@ -185,7 +187,7 @@ public class CreditTrackerController {
 	        	int id = 0;
 	        	id= (int)objUserService.fetchUserId(objUser);
 	        	request.getSession().setAttribute("id", id);
-	        	System.out.println("Actual user id is :"+id);
+	        	logger.info("Actual user id is :"+id);
 	        }
 	        else
 	        {
@@ -200,7 +202,7 @@ public class CreditTrackerController {
         	lOutputVO.setStatus("Error Logging In");
         	lOutputVO.setStatusCode("1");
         }
-        System.out.println("End login method of CreditTrackerController");
+        logger.info("End login method of CreditTrackerController");
 		 
         return lOutputVO; 
     }  
@@ -210,7 +212,7 @@ public class CreditTrackerController {
  @ResponseBody
  public OutputVO add(@RequestBody CreditCard  objCreditCard,HttpServletRequest request)
  {
-	System.out.println("Inside add method of CreditTrackerController");
+	 logger.info("Inside add method of CreditTrackerController");
 	OutputVO lOutputVO = new OutputVO();
 	
 	
@@ -225,7 +227,7 @@ public class CreditTrackerController {
     	if(validateCreditCard(objCreditCard))
     	{
 	    result = objUserService.addCreditCard(objCreditCard);
-	    System.out.println(result);
+	   
 	    
 	    if(result)
 	    {
@@ -251,7 +253,7 @@ public class CreditTrackerController {
     	lOutputVO.setStatusCode("1");
     	
     }
-    System.out.println("End of add method of CreditTrackerController");
+    logger.info("End of add method of CreditTrackerController");
     return lOutputVO;  
 }
     
@@ -261,7 +263,7 @@ public class CreditTrackerController {
 	@ResponseBody
 	 public OutputVO update(@RequestBody CreditCard  objCreditCard,HttpServletRequest request)
 	 {
-		 System.out.println("Inside update method of CreditTrackerController");
+	    logger.info("Inside update method of CreditTrackerController");
 	   
 	    OutputVO lOutputVO = new OutputVO();
 	    int result = 0;   
@@ -292,7 +294,7 @@ public class CreditTrackerController {
 	
 	    	
 	    }
-	    System.out.println("End update method of CreditTrackerController");
+	    logger.info("End update method of CreditTrackerController");
 	    return lOutputVO; 
 	}  
  
@@ -302,7 +304,7 @@ public class CreditTrackerController {
 	@ResponseBody
 	 public OutputVO getAllCreditDetails(HttpServletRequest request)
 	 {
-		System.out.println("Inside getAllCreditDetails method of CreditTrackerController");
+	    logger.info("Inside getAllCreditDetails method of CreditTrackerController");
 	    List <CreditCard> creditCardList = null;
 	    OutputVO lOutputVO = new OutputVO();
 	   
@@ -335,7 +337,7 @@ public class CreditTrackerController {
 	
 	    	
 	    }
-	    System.out.println("End getAllCreditDetails method of CreditTrackerController");
+	    logger.info("End getAllCreditDetails method of CreditTrackerController");
 	    return lOutputVO; 
 	}  
 
@@ -344,7 +346,7 @@ public class CreditTrackerController {
 	@ResponseBody
 	 public OutputVO getSelfCreditDetails(HttpServletRequest request)
 	 {
-		System.out.println("Inside getSelfCreditDetails method of CreditTrackerController");
+	    logger.info("Inside getSelfCreditDetails method of CreditTrackerController");
 	    List <CreditCard> creditCardList = null;
 	    OutputVO lOutputVO = new OutputVO();
 	    CreditCard  objCreditCard = new CreditCard();
@@ -379,7 +381,7 @@ public class CreditTrackerController {
 	
 	    	
 	    }
-	    System.out.println("End getSelfCreditDetails method of CreditTrackerController");
+	    logger.info("End getSelfCreditDetails method of CreditTrackerController");
 	    return lOutputVO; 
 	}  
 
@@ -406,7 +408,7 @@ public class CreditTrackerController {
 	 
 	 public boolean validateCreditCard(CreditCard objCreditCard)
 	 {
-		 System.out.println("Inside validateCreditCard method of CreditTrackerController");
+		 logger.info("Inside validateCreditCard method of CreditTrackerController");
 		 boolean result = false;
 		 
 		 if(objCreditCard.getCreditCardNumber()!= null
@@ -414,9 +416,9 @@ public class CreditTrackerController {
 		 { 
 			result = true;
 		 }
-		 System.out.println(result);
+		 logger.info(result);
 		 
-		 System.out.println("End of validateCreditCard method of CreditTrackerController");
+		 logger.info("End of validateCreditCard method of CreditTrackerController");
 		 return result;
 	 }
 	 

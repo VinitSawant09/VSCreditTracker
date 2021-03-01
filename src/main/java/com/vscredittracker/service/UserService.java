@@ -3,6 +3,7 @@ package com.vscredittracker.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +17,11 @@ public class UserService {
 	@Autowired
 	UserDAO userDao;
 	
+	private Logger logger = Logger.getLogger(UserService.class);
+	
 	public boolean registerUser(User objUser) {
 		// TODO Auto-generated method stub
-		System.out.println("Inside registerUser method of UserService");
+		logger.info("Inside registerUser method of UserService");
 		
 		boolean result = false;
 		try
@@ -29,14 +32,14 @@ public class UserService {
 		{
 			System.out.println(e);
 		}
-		System.out.println("End of registerUser method of UserService");
+		logger.info("End of registerUser method of UserService");
 		return result;
 	}
 
 	public boolean validateLogin(User objUser) 
 	{
 		// TODO Auto-generated method stub
-		System.out.println("Inside registerUser method of UserService");
+		logger.info("Inside registerUser method of UserService");
 		
 		boolean result = false;
 		try
@@ -47,14 +50,14 @@ public class UserService {
 		{
 			System.out.println(e);
 		}
-		System.out.println("End of registerUser method of UserService");
+		logger.info("End of registerUser method of UserService");
 		return result;
 	}
 	
 	public int fetchUserId(User objUser) 
 	{
 		// TODO Auto-generated method stub
-		System.out.println("Inside fetchUserId method of UserService");
+		logger.info("Inside fetchUserId method of UserService");
 		
 		int id = 0;
 		try
@@ -66,12 +69,12 @@ public class UserService {
 			System.out.println(e);
 		}
 		
-		System.out.println("End of fetchUserId method of UserService");
+		logger.info("End of fetchUserId method of UserService");
 		return id;
 	}
 	
 	public boolean addCreditCard(CreditCard objCreditCard) {
-		System.out.println("Inside addCreditCard method of UserService");
+		logger.info("Inside addCreditCard method of UserService");
 		
 		boolean result = false;
 		
@@ -85,13 +88,13 @@ public class UserService {
      		
      		e.printStackTrace();
      	}
-     	System.out.println("End of addCreditCard method of UserService");
+     	logger.info("End of addCreditCard method of UserService");
          return result;
 	}
 
 	public List<CreditCard> getCreditCardAfterUpdation(CreditCard objCreditCard) {
 		
-		System.out.println("Inside getCreditCardAfterUpdation method of UserService");
+		logger.info("Inside getCreditCardAfterUpdation method of UserService");
 		List<CreditCard> todolist = new ArrayList<CreditCard>();
      	try
      	{
@@ -103,13 +106,13 @@ public class UserService {
      		
      		e.printStackTrace();
      	}
-     	System.out.println("End of getCreditCardAfterUpdation method of UserService");
+     	logger.info("End of getCreditCardAfterUpdation method of UserService");
          return todolist;
 	}
 	
 	public List<CreditCard> getAllCreditCardAfterUpdation() {
 			
-			System.out.println("Inside getAllCreditCardAfterUpdation method of UserService");
+		logger.info("Inside getAllCreditCardAfterUpdation method of UserService");
 			List<CreditCard> todolist = new ArrayList<CreditCard>();
 	     	try
 	     	{
@@ -121,13 +124,13 @@ public class UserService {
 	     		
 	     		e.printStackTrace();
 	     	}
-	     	System.out.println("End of getAllCreditCardAfterUpdation method of UserService");
+	     	logger.info("End of getAllCreditCardAfterUpdation method of UserService");
 	         return todolist;
 		}
 	
 public int update(CreditCard objCreditCard) {
 		
-		System.out.println("Inside update method of UserService");
+	logger.info("Inside update method of UserService");
 		
 		int result =0;
      	try
@@ -140,7 +143,7 @@ public int update(CreditCard objCreditCard) {
      		
      		e.printStackTrace();
      	}
-     	System.out.println("End of update method of UserService");
+     	logger.info("End of update method of UserService");
          return result;
 	}
 
